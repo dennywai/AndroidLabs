@@ -2,5 +2,5 @@
 <resources>
     <string name="app_name">AndroidLabs</string>
     <string name="hello_message">Hola!</string>
-    <string name="ButtonText">I\'m a button</string>
+    <string name="ButtonText">Soy un botón</string>
 </resources>
