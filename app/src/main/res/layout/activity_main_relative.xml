@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/text1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/message"
+        android:layout_alignParentStart="true"
+        android:textSize="30dp"
+        tools:ignore="SpUsage" />
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text1"
+        android:gravity="center"
+        android:layout_toStartOf="@id/checkbox"
+        android:text="@string/ButtonText" />
+
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/text1"
+        android:layout_alignStart="@id/switched"
+        android:layout_alignParentEnd="true"
+        android:text="@string/checked" />
+
+    <ImageButton
+        android:id="@+id/flagCA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/flag"
+        android:layout_below="@id/button"
+        tools:ignore="ContentDescription" />
+
+    <Switch
+            android:id="@+id/switched"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/switching"
+        android:layout_below="@id/checkbox"
+        android:layout_toEndOf="@id/flagCA"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+    <EditText
+        android:id="@+id/input"
+        android:hint="@string/inputHint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName|textCapWords"
+        android:layout_below="@id/flagCA"
+        tools:ignore="Autofill" />
+
+</RelativeLayout>
