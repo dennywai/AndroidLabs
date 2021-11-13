@@ -21,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
         // setContentView loads objects onto the screen.
         // Before this function, the screen is empty.
 
-        setContentView(R.layout.activity_main_relative);
-
+        //setContentView(R.layout.activity_main_linear);
+        //setContentView(R.layout.activity_main_relative);
+        setContentView(R.layout.activity_main_grid);
 
         //Now that the screen was loaded, use findViewByid() to
         // get load the objects in Java:
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                             .show();
                 }
             });
-        Switch switched = findViewById(R.id.switched);
+       Switch switched = findViewById(R.id.switched);
         switched.setOnCheckedChangeListener((CompoundButton, click) -> {
             if (switched.isChecked()) {
                 Snackbar.make(switched, R.string.switchingOFF, Snackbar.LENGTH_LONG)

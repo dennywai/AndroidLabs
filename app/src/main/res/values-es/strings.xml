@@ -7,6 +7,8 @@
     <string name="checked">Mira esto!</string>
     <string name="inputHint">Escriba Aquí</string>
     <string name="switching">Encender / Apagar </string>
+    <string name="switchingON">El interruptor ya está ENCENDIDO</string>
+    <string name="switchingOFF">El interruptor ya está APAGADO</string>
     <string name="moreinfo">Acquí hay más información</string>
     <string name="undo">Deshacer</string>
 </resources>
