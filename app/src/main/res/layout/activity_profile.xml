@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/profile"
+        android:layout_weight="1" />
+
+    <TextView
+        android:id="@+id/yourname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yourname"
+        android:layout_weight="1" />
+
+    <EditText
+        android:id="@+id/entername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/entername"
+        android:layout_weight="1"
+        tools:ignore="Autofill,TextFields" />
+
+    <TextView
+        android:id="@+id/youremail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/youremail"
+        android:layout_weight="1" />
+
+    <EditText
+        android:id="@+id/enteremail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/enteremail"
+        android:layout_weight="1"
+        tools:ignore="Autofill,TextFields" />
+
+    <TextView
+        android:id="@+id/yourpicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/yourpicture"
+        android:layout_weight="1" />
+
+    <ImageButton
+        android:id="@+id/picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@android:drawable/picture_frame"
+        android:layout_weight="1"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/clickbutton"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/clickbutton"
+        android:layout_weight="1"/>
+
+</LinearLayout>

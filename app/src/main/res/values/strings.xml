@@ -10,4 +10,15 @@
     <string name="switchingOFF">The switch is now OFF</string>
     <string name="moreinfo">Here is more information</string>
     <string name="undo">Undo</string>
+    <string name="enteryouremail">Enter your email address:</string>
+    <string name="typepassword">Typer your password:</string>
+    <string name="emailhint">Type email here</string>
+    <string name="login">LOGIN</string>
+    <string name="profile">Your profile</string>
+    <string name="yourname">Your name:</string>
+    <string name="entername">Enter your name</string>
+    <string name="youremail">Your email:</string>
+    <string name="enteremail">Enter your email</string>
+    <string name="yourpicture">Your picture:</string>
+    <string name="clickbutton">Click the button above to take a picture</string>
 </resources>
