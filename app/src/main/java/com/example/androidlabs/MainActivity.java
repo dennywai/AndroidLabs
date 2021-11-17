@@ -1,19 +1,16 @@
 package com.example.androidlabs;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.snackbar.Snackbar;
-
 public class MainActivity extends AppCompatActivity {
 
+    SharedPreferences email = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,41 +18,34 @@ public class MainActivity extends AppCompatActivity {
         // setContentView loads objects onto the screen.
         // Before this function, the screen is empty.
 
-        //setContentView(R.layout.activity_main_linear);
-        //setContentView(R.layout.activity_main_relative);
-        setContentView(R.layout.activity_main_grid);
+        setContentView(R.layout.activity_main_email);
+
+        getSharedPreferences("EmailAddress", Context.MODE_PRIVATE);
+        SharedPreferences email;
+
+        email = getSharedPreferences("FileName", Context.MODE_PRIVATE);
+        String savedString = email.getString("EmailAddress", "");
+        EditText typeField = findViewById(R.id.emailhint);
+        typeField.setText(savedString);
 
         //Now that the screen was loaded, use findViewByid() to
         // get load the objects in Java:
-        TextView text1 = findViewById(R.id.text1);
+        EditText input = findViewById(R.id.emailhint);
+        TextView text = findViewById(R.id.enteremail);
 
-        EditText input = findViewById(R.id.input);
+    }
+        @Override
+        protected void onPause() {
+            super.onPause();
+            SharedPreferences sp = getSharedPreferences("EmailAddress", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor= sp.edit();
+        }
 
-        Button button = findViewById(R.id.button);
-        button.setOnClickListener( (click) -> Toast.makeText(MainActivity.this, getResources().getString(R.string.moreinfo), Toast.LENGTH_LONG).show());
+            private void saveSharedPreferences(String stringToSave){
+            SharedPreferences.Editor saveEmail = email.edit();
+            saveEmail.putString("EmailAddress", stringToSave);
+            saveEmail.commit();
+        }
+        }
 
-            CheckBox checkbox = findViewById(R.id.checkbox);
-            checkbox.setOnCheckedChangeListener((CompoundButton, click) -> {
-                if (checkbox.isChecked()) {
-                    Snackbar.make(checkbox, R.string.switchingON, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.undo, click2 -> checkbox.setChecked(false))
-                            .show();
-                } else {
-                    Snackbar.make(checkbox, R.string.switchingOFF, Snackbar.LENGTH_LONG)
-                            .setAction(R.string.undo, click2 -> checkbox.setChecked(true))
-                            .show();
-                }
-            });
-       Switch switched = findViewById(R.id.switched);
-        switched.setOnCheckedChangeListener((CompoundButton, click) -> {
-            if (switched.isChecked()) {
-                Snackbar.make(switched, R.string.switchingOFF, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.undo, click2 -> switched.setChecked(false))
-                        .show();
-            } else {
-                Snackbar.make(switched, R.string.switchingON, Snackbar.LENGTH_LONG)
-                        .setAction(R.string.undo, click2 -> switched.setChecked(true))
-                        .show();
-            }
-        });
-    }}
+            
