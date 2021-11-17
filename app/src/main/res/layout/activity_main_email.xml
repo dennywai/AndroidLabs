@@ -18,8 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:inputType="textEmailAddress"
-        android:text="@string/emailhint" />
+        android:hint="@string/emailhint"
+        android:inputType="textEmailAddress"/>
 
     <TextView
         android:id="@+id/typepassword"
@@ -29,6 +29,7 @@
         android:text="@string/typepassword" />
 
     <EditText
+        android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
