@@ -60,14 +60,14 @@ public class ProfileActivity extends AppCompatActivity {
         Log.e(ACTIVITY_NAME, "In onPause");
     }
     @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e(ACTIVITY_NAME, "In onStop");
+
+    } @Override
     protected void onDestroy() {
         super.onDestroy();
         Log.e(ACTIVITY_NAME, "In onDestroy");
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.e(ACTIVITY_NAME, "In onStop");
-    }
 }

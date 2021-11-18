@@ -31,12 +31,18 @@ public class MainActivity extends AppCompatActivity {
         typeField.setText(savedString);
 
         Button button = findViewById(R.id.login);
-        button.setOnClickListener( (click) -> {
+
             Intent profileActivity = new Intent(this, ProfileActivity.class);
-            this.startActivity(profileActivity);
-        });
+
+            button.setOnClickListener(click -> startActivity(profileActivity));
     }
-        @Override
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
         protected void onPause() {
             super.onPause();
             SharedPreferences sp = getSharedPreferences("EmailAddress", Context.MODE_PRIVATE);
@@ -45,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
             private void saveSharedPreferences(String stringToSave){
-            SharedPreferences.Editor saveEmail = prefs.edit();
-            saveEmail.putString("EmailAddress", stringToSave);
-            saveEmail.apply();
+            SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("EmailAddress", stringToSave);
+            editor.commit();
         }
         }
 
