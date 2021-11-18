@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AndroidLabs</string>
+    <string name="app_name">AndroideLaboratorios</string>
     <string name="message">Mira Mi GUI</string>
     <string name="hello_message">Hola</string>
     <string name="ButtonText">Clic Aquí</string>
@@ -11,4 +11,15 @@
     <string name="switchingOFF">El interruptor ya está APAGADO</string>
     <string name="moreinfo">Acquí hay más información</string>
     <string name="undo">Deshacer</string>
+    <string name="enteryouremail">Introduzca su dirección de correo electrónico:</string>
+    <string name="typepassword">Escriba su contraseña:</string>
+    <string name="emailhint">Escriba el correo electrónico aquí</string>
+    <string name="login">INICIAR SESIÓN</string>
+    <string name="profile">Su perfil</string>
+    <string name="yourname">Te Llamas:</string>
+    <string name="entername">Introduzca su nombre</string>
+    <string name="youremail">Su correo electrónico:</string>
+    <string name="enteremail">Ingrese su correo electrónico</string>
+    <string name="yourpicture">Su Imagen:</string>
+    <string name="clickbutton">Haga clic en el botón de arriba para tomar una foto</string>
 </resources>
