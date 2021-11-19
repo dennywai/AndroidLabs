@@ -13,6 +13,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final String ACTIVITY_NAME = "ProfileActivity";
+    ImageButton mImageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +21,8 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Log.e(ACTIVITY_NAME, "In onCreate");
 
-        ImageButton picture = (ImageButton) findViewById(R.id.picture);
-        picture.setOnClickListener(v -> dispatchTakePictureIntent());
+        mImageButton = (ImageButton) findViewById(R.id.picture);
+        mImageButton.setOnClickListener(v -> dispatchTakePictureIntent());
     }
 
     @Override
@@ -43,7 +44,6 @@ public class ProfileActivity extends AppCompatActivity {
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             Bundle extras = data.getExtras();
             Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ImageButton mImageButton = null;
             mImageButton.setImageBitmap(imageBitmap);
         }
     }
