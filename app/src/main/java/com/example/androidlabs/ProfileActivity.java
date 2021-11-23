@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -23,6 +24,12 @@ public class ProfileActivity extends AppCompatActivity {
 
         mImageButton = (ImageButton) findViewById(R.id.picture);
         mImageButton.setOnClickListener(v -> dispatchTakePictureIntent());
+
+        Button chatroom = findViewById(R.id.chatroom);
+
+        Intent ChatRoomActivity = new Intent(this, ChatRoomActivity.class);
+
+        chatroom.setOnClickListener(click -> startActivity(ChatRoomActivity));
     }
 
     @Override

@@ -65,4 +65,13 @@
         android:text="@string/clickbutton"
         android:layout_weight="1"/>
 
+    <Button
+        android:id="@+id/chatroom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/chatroom"
+        android:layout_gravity="center"
+        android:layout_weight="1"/>
+
+
 </LinearLayout>

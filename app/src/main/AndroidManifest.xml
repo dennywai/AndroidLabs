@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.androidlabs">
 
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -14,8 +16,11 @@
         android:theme="@style/Theme.AndroidLabs"
         tools:ignore="AllowBackup">
         <activity
+            android:name=".ChatRoomActivity"
+            android:exported="true" />
+        <activity
             android:name=".ProfileActivity"
-            android:exported="true"/>
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
