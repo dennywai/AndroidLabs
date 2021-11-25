@@ -24,12 +24,12 @@
         android:layout_gravity="start"/>
 
         <EditText
-            android:id="@+id/inputHint"
+            android:id="@+id/chattext"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="@string/inputHint"
-            tools:ignore="Autofill,TextFields"/>
+            android:hint="@string/chattext"
+           android:text=""/>
 
         <Button
             android:id="@+id/receive"

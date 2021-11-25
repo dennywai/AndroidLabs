@@ -17,7 +17,7 @@
         tools:ignore="AllowBackup">
         <activity
             android:name=".ChatRoomActivity"
-            android:exported="true" />
+            android:exported="true"/>
         <activity
             android:name=".ProfileActivity"
             android:exported="true" />
