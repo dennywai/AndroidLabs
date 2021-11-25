@@ -86,13 +86,13 @@ public class ChatRoomActivity extends AppCompatActivity {
 
                 message = (Messages) getItem(position);
 
-                if(message.texts == message.senttext) {
+                if(message.texts == Messages.senttext) {
                     view = inflater.inflate(R.layout.activity_send, parent, false);
                     row = view.findViewById(R.id.sendtext);
                     String show = getItem(position).toString();
                     row.setText(show);
                 }
-                else if(message.texts == message.receivedtext){
+                else if(message.texts == Messages.receivedtext){
                     view = inflater.inflate(R.layout.activity_receieve, parent, false);
                     row = view.findViewById(R.id.receivetext);
                     String show = getItem(position).toString();
