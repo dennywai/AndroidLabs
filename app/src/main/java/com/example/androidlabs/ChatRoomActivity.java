@@ -34,7 +34,6 @@ public class ChatRoomActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
-
         adapter = new ChatAdapter();
         ListView list = findViewById(R.id.listview);
 
