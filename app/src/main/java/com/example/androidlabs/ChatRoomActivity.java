@@ -1,9 +1,6 @@
 package com.example.androidlabs;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,10 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-
-
 import java.util.ArrayList;
-import java.util.List;
+
 
 public class ChatRoomActivity extends AppCompatActivity {
 
@@ -29,7 +24,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     TextView sendtext;
     TextView receivetext;
 
-    MyListAdapter adapter;
+    ChatAdapter adapter;
     ArrayList<Messages> messages = new ArrayList<>();
     Messages message;
 
@@ -40,7 +35,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_room);
 
 
-        adapter = new MyListAdapter();
+        adapter = new ChatAdapter();
         ListView list = findViewById(R.id.listview);
 
         send = findViewById(R.id.send);
@@ -66,7 +61,7 @@ public class ChatRoomActivity extends AppCompatActivity {
         list.setAdapter(adapter);
     }
 
-        protected class MyListAdapter<E> extends BaseAdapter {
+        protected class ChatAdapter extends BaseAdapter {
 
             @Override
             public int getCount() {
