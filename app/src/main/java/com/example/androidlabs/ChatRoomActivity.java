@@ -72,12 +72,11 @@ public class ChatRoomActivity extends AppCompatActivity {
                 builder.setTitle("Do you want to delete this?");
                 builder.setMessage("The selected row is: " + pos + " The database id is: "+id)
                 .setPositiveButton("YES", (click, arg) -> {
-                    messages.remove(message);
+                    messages.remove(pos);
                     adapter.notifyDataSetChanged();
                     Toast.makeText(ChatRoomActivity.this,"Message Deleted", Toast.LENGTH_LONG).show();
                 })
-                        .setNegativeButton("NO", (click, arg) -> {})
-
+                        .setNegativeButton("NO", (click, arg) -> { })
                         .create().show();
             return true;
         });
