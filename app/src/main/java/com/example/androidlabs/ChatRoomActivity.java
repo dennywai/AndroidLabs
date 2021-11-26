@@ -1,11 +1,14 @@
 package com.example.androidlabs;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -44,20 +47,35 @@ public class ChatRoomActivity extends AppCompatActivity {
         receivetext = findViewById(R.id.receivetext);
 
         send.setOnClickListener(click -> {
-            message = new Messages(chattext.getText().toString(),1);
+            message = new Messages(chattext.getText().toString(), 1);
             messages.add(message);
             adapter.notifyDataSetChanged();
             chattext.setText("");
-            });
+        });
 
         receive.setOnClickListener(click -> {
-            message = new Messages(chattext.getText().toString(),2);
+            message = new Messages(chattext.getText().toString(), 2);
             Log.e(ACTIVITY_NAME, message.content);
             messages.add(message);
             adapter.notifyDataSetChanged();
             chattext.setText("");
         });
         list.setAdapter(adapter);
+
+
+        list.setOnItemLongClickListener((p, b, pos, id) -> {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoomActivity.this);
+                builder.setTitle("ALERT");
+                builder.setMessage("Do you want to delete this?")
+                .setPositiveButton("YES", (click, arg) -> {
+                    adapter.notifyDataSetChanged();
+                })
+                        .setNegativeButton("NO", (click, arg) -> {})
+                        .setView(getLayoutInflater().inflate(R.layout.activity_send, null))
+                        .setView(getLayoutInflater().inflate(R.layout.activity_receieve, null))
+                        .create().show();
+            return true;
+        });
     }
 
         protected class ChatAdapter extends BaseAdapter {
