@@ -3,6 +3,7 @@ package com.example.androidlabs;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 
 
@@ -65,14 +68,16 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         list.setOnItemLongClickListener((p, b, pos, id) -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoomActivity.this);
-                builder.setTitle("ALERT");
-                builder.setMessage("Do you want to delete this?")
+
+                builder.setTitle("Do you want to delete this?");
+                builder.setMessage("The selected row is: " + pos + " The database id is: "+id)
                 .setPositiveButton("YES", (click, arg) -> {
+                    messages.remove(message);
                     adapter.notifyDataSetChanged();
+                    Toast.makeText(ChatRoomActivity.this,"Message Deleted", Toast.LENGTH_LONG).show();
                 })
                         .setNegativeButton("NO", (click, arg) -> {})
-                        .setView(getLayoutInflater().inflate(R.layout.activity_send, null))
-                        .setView(getLayoutInflater().inflate(R.layout.activity_receieve, null))
+
                         .create().show();
             return true;
         });
