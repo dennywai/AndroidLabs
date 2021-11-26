@@ -22,4 +22,8 @@
     <string name="enteremail">Ingrese su correo electrónico</string>
     <string name="yourpicture">Su Imagen:</string>
     <string name="clickbutton">Haga clic en el botón de arriba para tomar una foto</string>
+    <string name="chatroom">Ir al chat</string>
+    <string name="send">ENVIAR</string>
+    <string name="receive">RECIBIR</string>
+    <string name="chattext">Escriba Aquí</string>
 </resources>
