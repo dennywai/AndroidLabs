@@ -2,6 +2,9 @@ package com.example.androidlabs;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,6 +32,7 @@ public class ChatRoomActivity extends AppCompatActivity {
     ChatAdapter adapter;
     ArrayList<Messages> messages = new ArrayList<>();
     Messages message;
+    SQLiteDatabase db;
 
 
     @Override
@@ -44,6 +48,8 @@ public class ChatRoomActivity extends AppCompatActivity {
         chattext = findViewById(R.id.chattext);
         sendtext = findViewById(R.id.sendtext);
         receivetext = findViewById(R.id.receivetext);
+
+        loadDataFromDatabase();
 
         send.setOnClickListener(click -> {
             message = new Messages(chattext.getText().toString(), 1);
@@ -76,9 +82,48 @@ public class ChatRoomActivity extends AppCompatActivity {
                         .create().show();
             return true;
         });
+        list.setOnClickListener( click ->
+        {
+            //get the email and name that were typed
+            String send = sendtext.getText().toString();
+            String receive = receivetext.getText().toString();
+
+
+            //add to the database and get the new ID
+            ContentValues newRowValues = new ContentValues();
+
+            //Now provide a value for every database column defined in MyOpener.java:
+            //put string name in the SEND column:
+            newRowValues.put(MyOpener.COL_SEND, String.valueOf(sendtext));
+            //put string email in the RECEIVE column:
+            newRowValues.put(MyOpener.COL_RECEIVE, String.valueOf(receivetext));
+
+            //Now insert in the database:
+            long newId = db.insert(MyOpener.TABLE_NAME, null, newRowValues);
+
+            //now you have the newId, you can create the Contact object
+            Messages newMessage = new Messages(sendtext, receivetext, newId);
+
+            //add the new contact to the list:
+            contactsList.add(newContact);
+            //update the listView:
+            adapter.notifyDataSetChanged();
+
+            //clear the EditText fields:
+            sendtext.setText("");
+            receivetext.setText("");
+
+            //Show the id of the inserted item:
+            //Toast.makeText(this, "Inserted item id:"+newId, Toast.LENGTH_LONG).show();
+        });
     }
 
-        protected class ChatAdapter extends BaseAdapter {
+    private void loadDataFromDatabase() {
+        MyOpener dbOpener = new MyOpener(this);
+        db = dbOpener.getWritableDatabase();
+    }
+
+    protected class ChatAdapter extends BaseAdapter {
 
             @Override
             public int getCount() {
