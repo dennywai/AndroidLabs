@@ -25,4 +25,5 @@
     <string name="send">SEND</string>
     <string name="receive">RECEIVE</string>
     <string name="chattext">Type Here</string>
+    <string name ="weatherforecast">Weather Forecast</string>
 </resources>

@@ -28,6 +28,10 @@ public class ProfileActivity extends AppCompatActivity {
         Button chatroom = findViewById(R.id.chatroom);
         Intent ChatRoomActivity = new Intent(this, ChatRoomActivity.class);
         chatroom.setOnClickListener(click -> startActivity(ChatRoomActivity));
+
+        Button weatherforecast = findViewById(R.id.weatherforecast);
+        Intent WeatherForecast = new Intent(this, WeatherForecast.class);
+        weatherforecast.setOnClickListener(click -> startActivity(WeatherForecast));
     }
     @Override
     protected void onStart() {
