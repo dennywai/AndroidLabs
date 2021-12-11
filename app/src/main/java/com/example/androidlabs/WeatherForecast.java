@@ -181,4 +181,4 @@ public class WeatherForecast extends AppCompatActivity {
             progressbar.setVisibility(View.INVISIBLE);
         }
     }
-}}
+}
