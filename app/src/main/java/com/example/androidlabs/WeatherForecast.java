@@ -48,6 +48,10 @@ public class WeatherForecast extends AppCompatActivity {
         UV = findViewById(R.id.UV);
 
         progressbar.setVisibility(View.VISIBLE);
+
+        ForecastQuery fq = new ForecastQuery();
+        fq.execute("https://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric");
+
     }
 
     private class ForecastQuery extends AsyncTask<String, Integer, String> {
@@ -85,12 +89,13 @@ public class WeatherForecast extends AppCompatActivity {
                         if (xpp.getName().equals("temperature")) {
                             //If you get here, then you are pointing to a <Weather> start tag
                             currentWeather = xpp.getAttributeValue(null, "value");
-                            publishProgress();
+                            publishProgress(25);
                             min = xpp.getAttributeValue(null, "min");
-                            publishProgress();
+                            publishProgress(50);
                             max = xpp.getAttributeValue(null, "max");
-                            publishProgress();
-                        } else if (xpp.getName().equals("weather")) {
+                            publishProgress(75);
+                        }
+                        else if (xpp.getName().equals("weather")) {
                             iconName = xpp.getAttributeValue(null, "icon");
                         }
                         eventType = xpp.next(); //move to the next xml event and store it in a variable
