@@ -4,7 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:layout_marginTop="27dp"
+    android:layout_marginBottom="27dp"
+    android:layout_marginLeft="48dp"
+    android:layout_marginRight="48dp">
 
     <TextView
         android:id="@+id/profile"
@@ -26,7 +30,11 @@
         android:layout_height="wrap_content"
         android:hint="@string/entername"
         android:layout_weight="1"
-        tools:ignore="Autofill,TextFields" />
+        tools:ignore="Autofill,TextFields"
+        android:nextFocusDown="@id/weatherforecast"
+        android:nextFocusUp="@id/chatroom"
+        android:nextFocusLeft="@id/enteremail"
+        android:nextFocusRight="@id/picture"/>
 
     <TextView
         android:id="@+id/youremail"
@@ -41,7 +49,11 @@
         android:layout_height="wrap_content"
         android:hint="@string/enteremail"
         android:layout_weight="1"
-        tools:ignore="Autofill,TextFields" />
+        tools:ignore="Autofill,TextFields"
+        android:nextFocusDown="@id/weatherforecast"
+        android:nextFocusUp="@id/chatroom"
+        android:nextFocusLeft="@id/entername"
+        android:nextFocusRight="@id/picture"/>
 
     <TextView
         android:id="@+id/yourpicture"
@@ -56,7 +68,11 @@
         android:layout_height="wrap_content"
         android:src="@android:drawable/picture_frame"
         android:layout_weight="1"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription"
+        android:nextFocusDown="@id/enteremail"
+        android:nextFocusUp="@id/entername"
+        android:nextFocusLeft="@id/chatroom"
+        android:nextFocusRight="@id/weatherforecast"/>
 
     <TextView
         android:id="@+id/clickbutton"
@@ -71,7 +87,11 @@
         android:layout_height="wrap_content"
         android:text="@string/chatroom"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:nextFocusDown="@id/enteremail"
+        android:nextFocusUp="@id/entername"
+        android:nextFocusLeft="@id/picture"
+        android:nextFocusRight="@id/weatherforecast"/>
 
     <Button
         android:id="@+id/weatherforecast"
@@ -79,6 +99,10 @@
         android:layout_height="wrap_content"
         android:text="@string/weatherforecast"
         android:layout_gravity="center"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:nextFocusDown="@id/enteremail"
+        android:nextFocusUp="@id/entername"
+        android:nextFocusLeft="@id/chatroom"
+        android:nextFocusRight="@id/picture"/>
 
 </LinearLayout>

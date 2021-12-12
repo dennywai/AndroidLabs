@@ -4,7 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:layout_marginTop="27dp"
+    android:layout_marginBottom="27dp"
+    android:layout_marginLeft="48dp"
+    android:layout_marginRight="48dp">
 
     <TextView
         android:id="@+id/enteryouremail"
@@ -20,7 +24,11 @@
         android:layout_weight="1"
         android:hint="@string/emailhint"
         android:inputType="textEmailAddress"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill"
+        android:nextFocusDown="@id/emailhint"
+        android:nextFocusUp="@id/login"
+        android:nextFocusLeft="@id/emailhint"
+        android:nextFocusRight="@id/login"/>
 
     <TextView
         android:id="@+id/typepassword"
@@ -35,13 +43,21 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:inputType="textPassword"
-        tools:ignore="Autofill" />
+        tools:ignore="Autofill"
+        android:nextFocusDown="@id/password"
+        android:nextFocusUp="@id/login"
+        android:nextFocusLeft="@id/password"
+        android:nextFocusRight="@id/login"/>
 
     <Button
         android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@string/login"/>
+        android:text="@string/login"
+        android:nextFocusDown="@id/emailhint"
+        android:nextFocusUp="@id/password"
+        android:nextFocusLeft="@id/emailhint"
+        android:nextFocusRight="@id/password"/>
 
 </LinearLayout>
