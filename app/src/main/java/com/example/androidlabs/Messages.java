@@ -27,6 +27,10 @@ public class Messages {
     public String toString(){
         return message + id + isSent;
     }
+    public boolean isSent() {
+        return isSent;
+    }
 }
+
 
 
