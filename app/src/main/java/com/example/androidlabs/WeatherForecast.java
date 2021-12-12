@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 
 public class WeatherForecast extends AppCompatActivity {
 
@@ -49,9 +50,8 @@ public class WeatherForecast extends AppCompatActivity {
 
         progressbar.setVisibility(View.VISIBLE);
 
-        ForecastQuery fq = new ForecastQuery();
-        fq.execute("https://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric");
-
+        ForecastQuery fquery = new ForecastQuery();
+        fquery.execute("https://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric");
     }
 
     private class ForecastQuery extends AsyncTask<String, Integer, String> {
@@ -63,6 +63,7 @@ public class WeatherForecast extends AppCompatActivity {
         Bitmap weatherIcon;
         String iconName;
         String fileName;
+        HttpURLConnection connection;
 
         @Override
         protected String doInBackground(String... args) {
@@ -111,21 +112,20 @@ public class WeatherForecast extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         weatherIcon = BitmapFactory.decodeStream(fis);
-                        publishProgress(100);
                     } else {
 
                         String urlString = "https://openweathermap.org/img/w/" + fileName;
-
+                        //Bitmap weatherIcon = null;
                         URL url2 = new URL(urlString);
-                        HttpURLConnection connection = (HttpURLConnection) url2.openConnection();
+                        connection = (HttpURLConnection) url2.openConnection();
                         connection.connect();
                         int responseCode = connection.getResponseCode();
                         if (responseCode == 200) {
                             weatherIcon = BitmapFactory.decodeStream(connection.getInputStream());
                         }
-                        publishProgress(100);
-                    }
 
+                    }
+                    publishProgress(100);
 
                     FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
                     weatherIcon.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
@@ -138,23 +138,22 @@ public class WeatherForecast extends AppCompatActivity {
 
                     //JSON reading:
                     //Build the entire string response:
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(response, "UTF-8"), 8);
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(response, StandardCharsets.UTF_8), 8);
                     StringBuilder sb = new StringBuilder();
 
-                    String line = null;
+                    String line;
                     while ((line = reader.readLine()) != null) {
-                        sb.append(line + "\n");
+                        sb.append(line).append("\n");
                     }
-                    String result = sb.toString(); //result is the whole string
+                    String report = sb.toString(); //result is the whole string
 
                     // convert string to JSON:
-                    JSONObject uvReport = new JSONObject(result);
+                    JSONObject uvReport = new JSONObject(report);
 
                     //get the double associated with "value"
                     double uvRating = uvReport.getDouble("value");
                     Log.d("uvRating", String.valueOf(uvRating));
                     uv = String.valueOf(uvRating);
-
                 }
             }
                 catch(Exception e){
@@ -177,10 +176,10 @@ public class WeatherForecast extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            currenttemp.setText("Current Temperature is: " + currentTemp);
-            mintemp.setText("Min Temperature is: " + min);
-            maxtemp.setText("Max Temperature is: " + max);
-            UV.setText("UV Rating is: " + uv);
+            currenttemp.setText(currentTemp);
+            mintemp.setText(min);
+            maxtemp.setText(max);
+            UV.setText(uv);
             currentweather.setImageBitmap(weatherIcon);
 
             progressbar.setVisibility(View.INVISIBLE);

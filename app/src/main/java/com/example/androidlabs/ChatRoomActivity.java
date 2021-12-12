@@ -176,4 +176,3 @@ public class ChatRoomActivity extends AppCompatActivity {
 
         }
     }
-
