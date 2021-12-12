@@ -27,5 +27,9 @@ public class Messages {
     public String toString(){
         return message + id + isSent;
     }
+
+    public String getMessage() {
+        return message;
+    }
 }
 
