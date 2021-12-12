@@ -152,10 +152,10 @@ public class ChatRoomActivity extends AppCompatActivity {
         int idColIndex = c.getColumnIndex(MyOpener.COL_ID);
         c.moveToFirst();
         while(!c.isAfterLast()) {
-            int text = c.getInt(typeColIndex);
+            int type = c.getInt(typeColIndex);
             String message = c.getString(messageColIndex);
             long id = c.getLong(idColIndex);
-            Log.d("ROW", "type: " + text + ", message: " + message + ", id:" + id);
+            Log.d("ROW", "type: " + type + ", message: " + message + ", id:" + id);
             c.moveToNext();
         }
 
