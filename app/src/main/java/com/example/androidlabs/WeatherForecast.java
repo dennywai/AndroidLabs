@@ -2,7 +2,6 @@ package com.example.androidlabs;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -48,6 +47,7 @@ public class WeatherForecast extends AppCompatActivity {
         mintemp = findViewById(R.id.mintemp);
         maxtemp = findViewById(R.id.maxtemp);
         UV = findViewById(R.id.UV);
+        progressbar = findViewById(R.id.progressbar);
 
         progressbar.setVisibility(View.VISIBLE);
 
@@ -55,14 +55,13 @@ public class WeatherForecast extends AppCompatActivity {
         fquery.execute("https://api.openweathermap.org/data/2.5/weather?q=ottawa,ca&APPID=7e943c97096a9784391a981c4d878b22&mode=xml&units=metric");
     }
 
-    @SuppressLint("StaticFieldLeak")
     private class ForecastQuery extends AsyncTask<String, Integer, String> {
         String currentWeather;
         String uv;
         String min;
         String max;
         String currentTemp;
-        Bitmap weatherIcon;
+        Bitmap weatherIcon = null;
         String iconName;
         String fileName;
         HttpURLConnection connection;
@@ -97,9 +96,9 @@ public class WeatherForecast extends AppCompatActivity {
                             publishProgress(50);
                             max = xpp.getAttributeValue(null, "max");
                             publishProgress(75);
-                        }
-                        else if (xpp.getName().equals("weather")) {
+                        } else if (xpp.getName().equals("weather")) {
                             iconName = xpp.getAttributeValue(null, "icon");
+                            publishProgress(75);
                         }
                         eventType = xpp.next(); //move to the next xml event and store it in a variable
                     }
@@ -114,49 +113,47 @@ public class WeatherForecast extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         weatherIcon = BitmapFactory.decodeStream(fis);
+                        publishProgress(100);
                     } else {
 
                         String urlString = "https://openweathermap.org/img/w/" + fileName;
-                        //Bitmap weatherIcon = null;
                         URL url2 = new URL(urlString);
                         connection = (HttpURLConnection) url2.openConnection();
                         connection.connect();
                         int responseCode = connection.getResponseCode();
-                        if (responseCode == 200) {
-                            weatherIcon = BitmapFactory.decodeStream(connection.getInputStream());
-                        }
-
+                        if (responseCode == 200)
+                            BitmapFactory.decodeStream(connection.getInputStream());
                     }
                     publishProgress(100);
-
-                    FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-                    weatherIcon.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
-                    outputStream.flush();
-                    outputStream.close();
-
-                    URL uvUrl = new URL("https://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389");
-                    HttpURLConnection uvConnection = (HttpURLConnection) uvUrl.openConnection();
-                    response = uvConnection.getInputStream();
-
-                    //JSON reading:
-                    //Build the entire string response:
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(response, StandardCharsets.UTF_8), 8);
-                    StringBuilder sb = new StringBuilder();
-
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        sb.append(line).append("\n");
-                    }
-                    String report = sb.toString(); //result is the whole string
-
-                    // convert string to JSON:
-                    JSONObject uvReport = new JSONObject(report);
-
-                    //get the double associated with "value"
-                    double uvRating = uvReport.getDouble("value");
-                    Log.d("uvRating", String.valueOf(uvRating));
-                    uv = String.valueOf(uvRating);
                 }
+
+                FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+                weatherIcon.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
+                outputStream.flush();
+                outputStream.close();
+
+                URL uvUrl = new URL("https://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389");
+                HttpURLConnection uvConnection = (HttpURLConnection) uvUrl.openConnection();
+                response = uvConnection.getInputStream();
+
+                //JSON reading:
+                //Build the entire string response:
+                BufferedReader reader = new BufferedReader(new InputStreamReader(response, StandardCharsets.UTF_8), 8);
+                StringBuilder sb = new StringBuilder();
+
+                String line = null;
+                while ((line = reader.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                String report = sb.toString(); //result is the whole string
+
+                // convert string to JSON:
+                JSONObject uvReport = new JSONObject(report);
+
+                //get the double associated with "value"
+                double uvRating = uvReport.getDouble("value");
+                Log.d("uvRating", String.valueOf(uvRating));
+                uv = String.valueOf(uvRating);
             }
                 catch(Exception e){
                     Log.e("weather", "Error, something went wrong...");

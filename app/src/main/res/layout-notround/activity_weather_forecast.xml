@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.wear.widget.BoxInsetLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".WeatherForecast"
-    android:orientation="horizontal">
+    android:padding="15dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".WeatherForecast"
+        android:orientation="vertical">
 
     <ImageView
         android:id="@+id/currentweather"
@@ -41,3 +46,4 @@
         style="?android:attr/progressBarStyleHorizontal"/>
 
 </LinearLayout>
+</androidx.wear.widget.BoxInsetLayout>
