@@ -48,6 +48,7 @@ public class WeatherForecast extends AppCompatActivity {
         maxtemp = findViewById(R.id.maxtemp);
         UV = findViewById(R.id.UV);
 
+        progressbar = findViewById(R.id.progressbar);
         progressbar.setVisibility(View.VISIBLE);
 
         ForecastQuery fquery = new ForecastQuery();
@@ -56,7 +57,7 @@ public class WeatherForecast extends AppCompatActivity {
 
     private class ForecastQuery extends AsyncTask<String, Integer, String> {
         String currentWeather;
-        String uv;
+        Double uv;
         String min;
         String max;
         String currentTemp;
