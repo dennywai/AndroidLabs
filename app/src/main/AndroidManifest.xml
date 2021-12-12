@@ -18,13 +18,13 @@
         android:theme="@style/Theme.AndroidLabs">
         <activity
             android:name=".WeatherForecast"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ChatRoomActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
