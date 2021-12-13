@@ -31,7 +31,7 @@
             android:name=".WeatherForecast"
             android:exported="true" />
         <activity
-            android:name=".ChatRoomActivity"
+            android:name=".ChatRoomActivity1"
             android:exported="true" />
         <activity
             android:name=".ProfileActivity"
