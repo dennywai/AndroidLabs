@@ -14,7 +14,7 @@ public class MyOpener extends SQLiteOpenHelper {
     //Table name
     public final static String TABLE_NAME = "ChatLog";
     //Table columns
-    public final static String COL_ID = "id";
+    public final static String COL_ID = "_id";
     public final static String COL_MESSAGE = "message";
     public final static String COL_TYPE = "text";
 
@@ -27,7 +27,7 @@ public class MyOpener extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         db.execSQL("CREATE TABLE " + TABLE_NAME
-                + " (id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + " (_id INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COL_TYPE + " INTEGER, "
                 + COL_MESSAGE + " TEXT);");
     }

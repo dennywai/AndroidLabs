@@ -2,6 +2,8 @@ package com.example.androidlabs;
 
 import android.database.sqlite.SQLiteDatabase;
 
+import java.io.File;
+
 public class Messages {
     //static final int senttext = 1;
     //static final int receivedtext =2;
@@ -15,21 +17,27 @@ public class Messages {
         this.isSent = isSent;
         this.id = id;
     }
+
     public String getMessage() {
         return message;
     }
-    public long getId(){
+
+    public long getId() {
         return id;
     }
-    public void setId(long id){
+
+    public void setId(long id) {
         this.id = id;
     }
-    public String toString(){
+
+    public String toString() {
         return message + id + isSent;
     }
+
     public boolean isSent() {
         return isSent;
     }
+
 }
 
 
