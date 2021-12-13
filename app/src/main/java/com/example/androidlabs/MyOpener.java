@@ -14,7 +14,7 @@ public class MyOpener extends SQLiteOpenHelper {
     //Table name
     public final static String TABLE_NAME = "ChatLog";
     //Table columns
-    public final static String COL_ID = "id";
+    public final static String COL_ID = "_id";
     public final static String COL_MESSAGE = "message";
     public final static String COL_TYPE = "text";
 
