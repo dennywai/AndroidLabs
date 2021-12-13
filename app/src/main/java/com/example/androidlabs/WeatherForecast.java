@@ -63,8 +63,8 @@ public class WeatherForecast extends AppCompatActivity {
         String maxTemp;
         String currentTemp;
         Bitmap weatherIcon;
-        //String iconName;
-        //String fileName;
+        String iconName;
+        String fileName;
         HttpURLConnection connection;
 
         @Override
@@ -97,39 +97,36 @@ public class WeatherForecast extends AppCompatActivity {
                             publishProgress(50);
                             maxTemp = xpp.getAttributeValue(null, "max");
                             publishProgress(75);
-                        } else if (xpp.getName().equals("weather")) {
-                            String parameter = xpp.getAttributeValue(null, "icon");
-                            //iconName = xpp.getAttributeValue(null, "icon");
-                            //}
-                            //eventType = xpp.next(); //move to the next xml event and store it in a variable
-                            //}
-                            //fileName = iconName + ".png";
-                            Log.i("tag", "Searching for file..." + parameter + ".png"); //fileName);
+                        }
 
-                            if (fileExistance(parameter + ".png")) {
-                                Log.i("tag", "File found: " + parameter + ".png");
-                                //}
+                        else if (xpp.getName().equals("weather")) {
+
+                            iconName = xpp.getAttributeValue(null, "icon");
+                            fileName = iconName + ".png";
+                            Log.i("tag", "Searching for file..." + fileName);
+
+                            if (fileExistance(fileName)) {
+                                Log.i("tag", "File found: " + fileName);
                                 FileInputStream fis = null;
                                 try {
-                                    fis = openFileInput(parameter + ".png"); //fileName);
+                                    fis = openFileInput(fileName);
                                 } catch (FileNotFoundException e) {
                                     e.printStackTrace();
                                 }
-                                weatherIcon = BitmapFactory.decodeStream(fis);
-                            } else {
-                                Log.i("tag", "File not found: " + parameter + ".png");
 
-                                URL urlIcon = new URL("https://openweathermap.org/img/w/" + parameter + ".png");
-                                //String urlString = "https://openweathermap.org/img/w/" + fileName;
-                                //Bitmap weatherIcon = null;
-                                //URL url2 = new URL(urlString);
-                                connection = (HttpURLConnection) urlIcon.openConnection(); //url2.openConnection();
+                                weatherIcon = BitmapFactory.decodeStream(fis);
+                            }
+                            else {
+                                Log.i("tag", "File not found: " + fileName);
+
+                                URL urlIcon = new URL("https://openweathermap.org/img/w/" + fileName);
+                                connection = (HttpURLConnection) urlIcon.openConnection();
                                 connection.connect();
+
                                 int responseCode = connection.getResponseCode();
                                 if (responseCode == 200) {
                                     weatherIcon = BitmapFactory.decodeStream(connection.getInputStream());
-                                    FileOutputStream outputStream = openFileOutput(parameter + ".png", Context.MODE_PRIVATE);
-                                    //FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
+                                    FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
                                     weatherIcon.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
                                     outputStream.flush();
                                     outputStream.close();
@@ -144,18 +141,12 @@ public class WeatherForecast extends AppCompatActivity {
                 Log.e("Error", e.getMessage());
             }
 
-            //FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-            //weatherIcon.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
-            //outputStream.flush();
-            //outputStream.close();
 
             try {
-                //URL uvUrl = new URL("https://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389");
                 URL url = new URL(args[1]);
-                HttpURLConnection uurlConnection = (HttpURLConnection) url.openConnection();
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
-                InputStream response = uurlConnection.getInputStream();
-                response = uurlConnection.getInputStream();
+                InputStream response = urlConnection.getInputStream();
 
                 //JSON reading:
                 //Build the entire string response:
@@ -175,18 +166,9 @@ public class WeatherForecast extends AppCompatActivity {
                 uvRating = uvReport.getDouble("value");
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
-                //Log.d("uvRating", String.valueOf(uvRating));
-                //uvRating = String.valueOf(uvRating);
             }
             return "Done";
         }
-        //catch(Exception e){
-        //Log.e("weather", "Error, something went wrong...");
-        //e.printStackTrace();
-        //}
-        //return "Done";
-        //}
-
 
         @Override
         protected void onProgressUpdate(Integer... args) {
@@ -197,17 +179,15 @@ public class WeatherForecast extends AppCompatActivity {
         @Override
         protected void onPostExecute(String fromDoInBackground) {
             Log.i("HTTP", fromDoInBackground);
-            currenttemp.setText(currentTemp);
-            mintemp.setText(minTemp);
-            maxtemp.setText(maxTemp);
-            UV.setText(uvRating.toString());
+            currenttemp.setText("Current Temperature: " + currentTemp);
+            mintemp.setText("Min. Temperature: " + minTemp);
+            maxtemp.setText("Max Temperature: " + maxTemp);
+            UV.setText("UV Rating: " + uvRating.toString());
             currentweather.setImageBitmap(weatherIcon);
             progressbar.setVisibility(View.INVISIBLE);
         }
-
         public boolean fileExistance(String fileName) {
             File file = getBaseContext().getFileStreamPath(fileName);
-            //Log.i("File exists.", String.valueOf(file.exists()));
             return file.exists();
         }
     }

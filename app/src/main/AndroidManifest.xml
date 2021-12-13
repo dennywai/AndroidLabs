@@ -17,9 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidLabs">
 
-       //meta-data
-            //android:name="com.google.android.wearable.standalone"
-            //android:value="true" />
+       <meta-data
+            android:name="com.google.android.wearable.standalone"
+            android:value="true" />
 
         <activity
             android:name=".WeatherForecast"
