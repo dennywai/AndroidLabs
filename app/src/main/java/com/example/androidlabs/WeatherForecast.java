@@ -97,43 +97,36 @@ public class WeatherForecast extends AppCompatActivity {
                             publishProgress(50);
                             maxTemp = xpp.getAttributeValue(null, "max");
                             publishProgress(75);
-                        } else if (xpp.getName().equals("weather")) {
-                            //String parameter = xpp.getAttributeValue(null, "icon");
+                        }
+
+                        else if (xpp.getName().equals("weather")) {
+
                             iconName = xpp.getAttributeValue(null, "icon");
-                            //}
-                            //eventType = xpp.next(); //move to the next xml event and store it in a variable
-                            //}
                             fileName = iconName + ".png";
-                            Log.i("tag", "Searching for file..." + fileName);//iconName + ".png");
+                            Log.i("tag", "Searching for file..." + fileName);
 
                             if (fileExistance(fileName)) {
-                                //iconName + ".png")) {
                                 Log.i("tag", "File found: " + fileName);
-                                        //iconName + ".png");
                                 FileInputStream fis = null;
                                 try {
                                     fis = openFileInput(fileName);
-                                            //iconName + ".png"); //
                                 } catch (FileNotFoundException e) {
                                     e.printStackTrace();
                                 }
+
                                 weatherIcon = BitmapFactory.decodeStream(fis);
-                            } else {
+                            }
+                                else {
                                 Log.i("tag", "File not found: " + fileName);
-                                        //iconName + ".png");
 
                                 URL urlIcon = new URL("https://openweathermap.org/img/w/" + fileName);
-                                        //iconName + ".png");
-                                //String urlString = "https://openweathermap.org/img/w/" + fileName;
-                                //Bitmap weatherIcon = null;
-                                connection = (HttpURLConnection) urlIcon.openConnection(); //url2.openConnection();
+                                connection = (HttpURLConnection) urlIcon.openConnection();
                                 connection.connect();
+
                                 int responseCode = connection.getResponseCode();
                                 if (responseCode == 200) {
                                     weatherIcon = BitmapFactory.decodeStream(connection.getInputStream());
                                     FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-                                            //iconName + ".png", Context.MODE_PRIVATE);
-                                    //FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
                                     weatherIcon.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
                                     outputStream.flush();
                                     outputStream.close();
@@ -148,18 +141,12 @@ public class WeatherForecast extends AppCompatActivity {
                 Log.e("Error", e.getMessage());
             }
 
-            //FileOutputStream outputStream = openFileOutput(fileName, Context.MODE_PRIVATE);
-            //weatherIcon.compress(Bitmap.CompressFormat.PNG, 80, outputStream);
-            //outputStream.flush();
-            //outputStream.close();
 
             try {
-                //URL uvUrl = new URL("https://api.openweathermap.org/data/2.5/uvi?appid=7e943c97096a9784391a981c4d878b22&lat=45.348945&lon=-75.759389");
                 URL url = new URL(args[1]);
                 HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
 
                 InputStream response = urlConnection.getInputStream();
-                //response = urlConnection.getInputStream();
 
                 //JSON reading:
                 //Build the entire string response:
@@ -179,17 +166,9 @@ public class WeatherForecast extends AppCompatActivity {
                 uvRating = uvReport.getDouble("value");
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
-                //Log.d("uvRating", String.valueOf(uvRating));
-                //uvRating = String.valueOf(uvRating);
             }
             return "Done";
         }
-        //catch(Exception e){
-        //Log.e("weather", "Error, something went wrong...");
-        //e.printStackTrace();
-        //}
-        //return "Done";
-        //}
 
         @Override
         protected void onProgressUpdate(Integer... args) {
@@ -209,7 +188,6 @@ public class WeatherForecast extends AppCompatActivity {
         }
         public boolean fileExistance(String fileName) {
             File file = getBaseContext().getFileStreamPath(fileName);
-            //Log.i("File exists.", String.valueOf(file.exists()));
             return file.exists();
         }
     }
