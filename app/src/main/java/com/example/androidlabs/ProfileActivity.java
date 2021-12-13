@@ -25,8 +25,8 @@ public class ProfileActivity extends AppCompatActivity {
         mImageButton.setOnClickListener(v -> dispatchTakePictureIntent());
 
         Button chatroom = findViewById(R.id.chatroom);
-        Intent ChatRoomActivity = new Intent(this, ChatRoomActivity.class);
-        chatroom.setOnClickListener(click -> startActivity(ChatRoomActivity));
+        Intent ChatRoomActivity1 = new Intent(this, ChatRoomActivity1.class);
+        chatroom.setOnClickListener(click -> startActivity(ChatRoomActivity1));
 
         Button weatherforecast = findViewById(R.id.weatherforecast);
         Intent WeatherForecast = new Intent(this, WeatherForecast.class);
