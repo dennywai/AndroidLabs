@@ -26,8 +26,8 @@ public class ProfileActivity extends AppCompatActivity {
         mImageButton.setOnClickListener(v -> dispatchTakePictureIntent());
 
         Button chatroom = findViewById(R.id.chatroom);
-        Intent ChatRoomActivity = new Intent(this, ChatRoomActivity.class);
-        chatroom.setOnClickListener(click -> startActivity(ChatRoomActivity));
+        Intent ChatRoomActivity1 = new Intent(this, ChatRoomActivity1.class);
+        chatroom.setOnClickListener(click -> startActivity(ChatRoomActivity1));
     }
     @Override
     protected void onStart() {
