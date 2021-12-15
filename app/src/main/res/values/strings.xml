@@ -25,5 +25,10 @@
     <string name="send">SEND</string>
     <string name="receive">RECEIVE</string>
     <string name="chattext">Type Here</string>
-    <string name ="weatherforecast">Weather Forecast</string>
+    <string name="weatherforecast">Weather Forecast</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="messagehere">Message Here</string>
+    <string name="id">ID=</string>
+    <string name="issend">Is a Send Message</string>
+    <string name="hide">HIDE</string>
 </resources>
