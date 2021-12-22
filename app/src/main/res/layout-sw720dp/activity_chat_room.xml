@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ChatRoomActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ChatRoomActivity">
 
-<ListView
-    android:id="@+id/listview"
-    android:layout_width="300dp"
-    android:layout_height="wrap_content"
-    android:layout_weight="1"/>
 
-    <LinearLayout
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="300dp"
+        android:layout_height="fill_parent"
+        android:layout_alignParentTop="true"/>
+
+    <FrameLayout
+        android:id="@+id/framelayout"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@id/listview"/>
+
+
     <Button
         android:id="@+id/send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/send"
-        android:layout_gravity="start"/>
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"/>
 
 
-        <EditText
-            android:id="@+id/chattext"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="@string/chattext"
-           android:text=""/>
+    <EditText
+        android:id="@+id/chattext"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@id/receive"
+        android:layout_toRightOf="@id/send"
+        android:hint="@string/chattext" />
 
-        <Button
-            android:id="@+id/receive"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/receive"
-            android:gravity="end"/>
-
-</LinearLayout>
-
-    <FrameLayout
-        android:id="@+id/framelayout"
+    <Button
+        android:id="@+id/receive"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="@string/receive"
+        android:layout_alignRight="@id/listview"
+        android:layout_alignParentBottom="true" />
 
-</LinearLayout>
+</RelativeLayout>
