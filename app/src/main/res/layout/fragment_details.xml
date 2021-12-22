@@ -6,9 +6,9 @@
     tools:context=".DetailsFragment"
     android:id="@+id/fragmentdetail">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
@@ -16,28 +16,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/messagehere"
-            android:textSize="24sp" />
+            android:layout_alignParentTop="true"/>
 
         <TextView
             android:id="@+id/id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/id"
-            android:textSize="24sp" />
+            android:layout_below="@id/messagehere"/>
 
         <CheckBox
             android:id="@+id/issend"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@id/id"
             android:text="@string/issend" />
-
-    </LinearLayout>
 
     <Button
         android:id="@+id/hideButton"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_alignParentBottom="true"
         android:text="HIDE" />
+    </RelativeLayout>
 
 </FrameLayout>
