@@ -12,7 +12,7 @@ public class EmptyActivity extends AppCompatActivity {
         setContentView(R.layout.activity_empty);
 
         Bundle bundle = getIntent().getExtras();
-            DetailFragment dFragment = new DetailFragment(); //add a DetailFragment
+            DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
             dFragment.setArguments(bundle); //pass it a bundle for information
             getSupportFragmentManager()
                     .beginTransaction()

@@ -23,6 +23,9 @@ import java.util.Arrays;
 
 
 public class ChatRoomActivity1 extends AppCompatActivity {
+    public static final String ITEM_ID = "ITEM_ID";
+    public static final String ITEM_SELECTED = "ITEM_SELECTED";
+    public static final String ITEM_POSITION = "ITEM_POSITION";
     public String ACTIVITY_NAME = "ProfileActivity";
     Button send;
     Button receive;
@@ -40,7 +43,7 @@ public class ChatRoomActivity1 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_room);
 
-        boolean tablet = (findViewById(R.id.framelayout) != null);
+        boolean isTablet = (findViewById(R.id.framelayout) != null);
 
         send = findViewById(R.id.send);
         receive = findViewById(R.id.receive);
@@ -80,7 +83,7 @@ public class ChatRoomActivity1 extends AppCompatActivity {
 
         }
 
-        send.setOnClickListener(v -> {
+        send.setOnClickListener(click -> {
 
             //add to the database and get the new ID
             ContentValues newValues = new ContentValues();
@@ -123,29 +126,7 @@ public class ChatRoomActivity1 extends AppCompatActivity {
         listview.setAdapter(adapter);
 
 
-        listview.setOnItemClickListener((list, b, position, id) -> {
-                    Bundle dataToPass = new Bundle();
-                    dataToPass.putString(ITEM_SELECTED, source.get(position));
-                    dataToPass.putInt(ITEM_POSITION, position);
-                    dataToPass.putLong(ITEM_ID, id);
-
-                    if (isTablet) {
-                        DetailFragment dFragment = new DetailFragment(); //add a DetailFragment
-                        dFragment.setArguments(dataToPass); //pass it a bundle for information
-                        getSupportFragmentManager()
-                                .beginTransaction()
-                                .replace(R.id.fragmentdetail, dFragment) //Add the fragment in FrameLayout
-                                .commit(); //actually load the fragment.
-                    } else //isPhone
-                    {
-                        Intent nextActivity = new Intent(this, EmptyActivity.class);
-                        nextActivity.putExtras(dataToPass); //send data to next activity
-                        startActivity(nextActivity); //make the transition
-                    }
-                    return true;
-                });
-
-            listview.setOnItemClickListener((p, b, position, id) -> {
+            listview.setOnItemClickListener((list, b, position, id) -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoomActivity1.this);
                 builder.setTitle("Do you want to delete this?")
 
@@ -162,9 +143,31 @@ public class ChatRoomActivity1 extends AppCompatActivity {
                         .create().show();
                 Toast.makeText(ChatRoomActivity1.this, "Message Deleted", Toast.LENGTH_LONG).show();
 
-            }));
+            });
             printCursor(results, db.getVersion());
-        }
+
+
+        listview.setOnItemClickListener((list, b, position, id) -> {
+            Bundle dataToPass = new Bundle();
+            dataToPass.putString(ITEM_SELECTED, messageList.get(position).getMessage());
+            dataToPass.putBoolean(ITEM_POSITION, messageList.get(position).isSent());
+            dataToPass.putLong(ITEM_ID, id);
+
+            if (isTablet) {
+                DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
+                dFragment.setArguments(dataToPass); //pass it a bundle for information
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentdetail, dFragment) //Add the fragment in FrameLayout
+                        .commit(); //actually load the fragment.
+            } else //isPhone
+            {
+                Intent nextActivity = new Intent(this, EmptyActivity.class);
+                nextActivity.putExtras(dataToPass); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
+        });
+    }
 
     public void printCursor(Cursor c, int version){
         Log.d("PrintCursor", "Version No.: " + MyOpener.VERSION_NUM);
