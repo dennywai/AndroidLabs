@@ -24,9 +24,10 @@ import java.util.Arrays;
 
 
 public class ChatRoomActivity1 extends AppCompatActivity {
-    public static final String MESSEGE = "MESSEGE";
-    public static final String _ID = "_ID";
-    public static final String ISSEND = "ISSEND";
+
+    public static final String _ID = "_Id";
+    public static final String ISSEND = "issend";
+    public static final String MESSAGE = "Message";
     public String ACTIVITY_NAME = "ProfileActivity";
     Button send;
     Button receive;
@@ -127,7 +128,26 @@ public class ChatRoomActivity1 extends AppCompatActivity {
         listview.setAdapter(adapter);
 
 
-            listview.setOnItemClickListener((list, b, position, id) -> {
+        listview.setOnItemClickListener((list, item, position, id) -> {
+            Bundle bundle = new Bundle();
+            bundle.putString(MESSAGE, messageList.get(position).getMessage());
+            bundle.putBoolean(ISSEND, messageList.get(position).isSent());
+            bundle.putLong(_ID, messageList.get(position).getId());
+
+            if (isTablet) {
+                DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
+                dFragment.setArguments(bundle); //pass it a bundle for information
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentdetail, dFragment).commit(); //Add the fragment in FrameLayout.commit(); //actually load the fragment.
+                Log.d("Row", "Type:");
+            } else //isPhone
+            {
+                Intent nextActivity = new Intent(ChatRoomActivity1.this, EmptyActivity.class);
+                nextActivity.putExtras(bundle); //send data to next activity
+                startActivity(nextActivity); //make the transition
+            }
+        });
+
+            listview.setOnItemClickListener((list, item, position, id) -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoomActivity1.this);
                 builder.setTitle("Do you want to delete this?")
 
@@ -147,25 +167,6 @@ public class ChatRoomActivity1 extends AppCompatActivity {
             });
 
             printCursor(results, db.getVersion());
-
-        listview.setOnItemClickListener((list, b, position, id) -> {
-            Bundle bundle = new Bundle();
-            bundle.putString(MESSEGE, messageList.get(position).getMessage());
-            bundle.putBoolean(ISSEND, messageList.get(position).isSent());
-            bundle.putLong(_ID, messageList.get(position).getId());
-
-            if (isTablet) {
-                DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
-                dFragment.setArguments(bundle); //pass it a bundle for information
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentdetail, dFragment); //Add the fragment in FrameLayout.commit(); //actually load the fragment.
-                Log.d("Row", "Type:");
-            } else //isPhone
-            {
-                Intent nextActivity = new Intent(this, EmptyActivity.class);
-                nextActivity.putExtras(bundle); //send data to next activity
-                startActivity(nextActivity); //make the transition
-            }
-        });
 
     }
 
