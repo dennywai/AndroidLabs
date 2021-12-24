@@ -11,10 +11,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,9 +24,9 @@ import java.util.Arrays;
 
 
 public class ChatRoomActivity1 extends AppCompatActivity {
-    public static final String ITEM_ID = "ITEM_ID";
-    public static final String ITEM_SELECTED = "ITEM_SELECTED";
-    public static final String ITEM_POSITION = "ITEM_POSITION";
+    public static final String MESSEGE = "MESSEGE";
+    public static final String _ID = "_ID";
+    public static final String ISSEND = "ISSEND";
     public String ACTIVITY_NAME = "ProfileActivity";
     Button send;
     Button receive;
@@ -134,7 +135,7 @@ public class ChatRoomActivity1 extends AppCompatActivity {
                         .setPositiveButton("Yes", (click, arg) -> {
                             delete(messageList.get(position));
                             messageList.remove(position);
-                            Log.d("row", "type: ");
+                            Log.d("Row", "Type: ");
                             adapter.notifyDataSetChanged();
 
                         })
@@ -144,29 +145,28 @@ public class ChatRoomActivity1 extends AppCompatActivity {
                 Toast.makeText(ChatRoomActivity1.this, "Message Deleted", Toast.LENGTH_LONG).show();
 
             });
+
             printCursor(results, db.getVersion());
 
-
         listview.setOnItemClickListener((list, b, position, id) -> {
-            Bundle dataToPass = new Bundle();
-            dataToPass.putString(ITEM_SELECTED, messageList.get(position).getMessage());
-            dataToPass.putBoolean(ITEM_POSITION, messageList.get(position).isSent());
-            dataToPass.putLong(ITEM_ID, id);
+            Bundle bundle = new Bundle();
+            bundle.putString(MESSEGE, messageList.get(position).getMessage());
+            bundle.putBoolean(ISSEND, messageList.get(position).isSent());
+            bundle.putLong(_ID, messageList.get(position).getId());
 
             if (isTablet) {
                 DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
-                dFragment.setArguments(dataToPass); //pass it a bundle for information
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.fragmentdetail, dFragment) //Add the fragment in FrameLayout
-                        .commit(); //actually load the fragment.
+                dFragment.setArguments(bundle); //pass it a bundle for information
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentdetail, dFragment); //Add the fragment in FrameLayout.commit(); //actually load the fragment.
+                Log.d("Row", "Type:");
             } else //isPhone
             {
                 Intent nextActivity = new Intent(this, EmptyActivity.class);
-                nextActivity.putExtras(dataToPass); //send data to next activity
+                nextActivity.putExtras(bundle); //send data to next activity
                 startActivity(nextActivity); //make the transition
             }
         });
+
     }
 
     public void printCursor(Cursor c, int version){
