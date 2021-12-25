@@ -137,7 +137,7 @@ public class ChatRoomActivity1 extends AppCompatActivity {
             if (isTablet) {
                 DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
                 dFragment.setArguments(bundle); //pass it a bundle for information
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragmentdetail, dFragment).commit(); //Add the fragment in FrameLayout.commit(); //actually load the fragment.
+                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, dFragment).commit(); //Add the fragment in FrameLayout.commit(); //actually load the fragment.
                 Log.d("Row", "Type:");
             } else //isPhone
             {
@@ -147,7 +147,7 @@ public class ChatRoomActivity1 extends AppCompatActivity {
             }
         });
 
-            listview.setOnItemClickListener((list, item, position, id) -> {
+            listview.setOnItemLongClickListener((list, item, position, id) -> {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ChatRoomActivity1.this);
                 builder.setTitle("Do you want to delete this?")
 
@@ -164,6 +164,7 @@ public class ChatRoomActivity1 extends AppCompatActivity {
                         .create().show();
                 Toast.makeText(ChatRoomActivity1.this, "Message Deleted", Toast.LENGTH_LONG).show();
 
+                return true;
             });
 
             printCursor(results, db.getVersion());

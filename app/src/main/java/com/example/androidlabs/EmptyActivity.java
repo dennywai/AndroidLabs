@@ -14,6 +14,6 @@ public class EmptyActivity extends AppCompatActivity {
 
             DetailsFragment dFragment = new DetailsFragment(); //add a DetailFragment
             dFragment.setArguments(bundle); //pass it a bundle for information
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragmentdetail, dFragment).commit(); //Add the fragment in FrameLayout.commit(); //actually load the fragment.
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, dFragment).commit(); //Add the fragment in FrameLayout.commit(); //actually load the fragment.
     }
 }
