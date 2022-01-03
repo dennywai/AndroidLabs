@@ -31,4 +31,7 @@
     <string name="id">ID=</string>
     <string name="issend">Is a Send Message</string>
     <string name="hide">HIDE</string>
+    <string name ="goto_toolbar">Go to Toolbar Page</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 </resources>
