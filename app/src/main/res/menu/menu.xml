@@ -4,19 +4,19 @@
 
     <item android:id="@+id/item1"
         android:title="Item 1"
-        android:icon="@drawable/icon1"
+        android:icon="@drawable/icon130"
         android:orderInCategory="10"
         app:showAsAction="always"/>
 
     <item android:id="@+id/item2"
         android:title="Item 2"
-        android:icon="@drawable/icon2"
+        android:icon="@drawable/icon230"
         android:orderInCategory="20"
         app:showAsAction="always"/>
 
     <item android:id="@+id/item3"
         android:title="Item 3"
-        android:icon="@drawable/icon3"
+        android:icon="@drawable/icon330"
         android:orderInCategory="30"
         app:showAsAction="always"/>
 
